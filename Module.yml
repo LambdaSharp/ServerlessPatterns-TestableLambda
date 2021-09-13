@@ -6,11 +6,14 @@ Items:
     Timeout: 30
     Sources:
 
-      - Api: POST:/preview
+      - Api: POST:/posts/preview
         Invoke: PreviewPost
 
-      - Api: POST:/create
+      - Api: POST:/posts
         Invoke: CreatePost
+
+      - Api: GET:/posts
+        Invoke: ListPosts
 
       - Api: GET:/view/{postId}
         Invoke: ViewPost

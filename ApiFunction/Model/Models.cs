@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ServerlessPatterns.TestableLambda.ApiFunction.Model {
 
@@ -31,5 +32,19 @@ namespace ServerlessPatterns.TestableLambda.ApiFunction.Model {
         public string Id { get; set; }
         public DateTimeOffset DateTime { get; set; }
         public string Html { get; set; }
+    }
+
+    public sealed class ListPostsResponse {
+
+        //--- Types ---
+        public sealed class Entry {
+
+            //--- Properties ---
+            public string Id { get; set; }
+            public DateTimeOffset DateTime { get; set; }
+        }
+
+        //--- Properties ---
+        public List<Entry> Posts { get; set; }
     }
 }

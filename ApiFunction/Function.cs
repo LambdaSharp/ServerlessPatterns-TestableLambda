@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LambdaSharp;
 using LambdaSharp.ApiGateway;
@@ -45,7 +47,7 @@ namespace ServerlessPatterns.TestableLambda.ApiFunction {
         }
 
         public async Task<ViewPostResponse> ViewPostAsync(string postId) {
-            var postRecord = await DataAccessClient.GetPostRecord(postId);
+            var postRecord = await DataAccessClient.GetPostRecordAsync(postId);
             if(postRecord == null) {
                 throw AbortNotFound("could not find post");
             }
@@ -53,6 +55,16 @@ namespace ServerlessPatterns.TestableLambda.ApiFunction {
                 Id = postRecord.Id,
                 DateTime = postRecord.DateTime,
                 Html = Markdown.ToHtml(postRecord.Markdown)
+            };
+        }
+
+        public async Task<ListPostsResponse> ListPostsAsync() {
+            var postRecords = await DataAccessClient.ListPostRecordsAsync(limit: 10);
+            return new ListPostsResponse {
+                Posts = postRecords.Select(record => new ListPostsResponse.Entry {
+                    Id = record.Id,
+                    DateTime = record.DateTime
+                }).ToList()
             };
         }
     }
