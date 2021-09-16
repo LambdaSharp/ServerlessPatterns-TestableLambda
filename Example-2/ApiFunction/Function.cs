@@ -45,7 +45,7 @@ namespace ServerlessPatterns.TestableLambda.ApiFunction {
             var postRecord = await Logic.CreatePostAsync(request.Markdown);
             if(postRecord == null) {
 
-                // an internal error occurred that preventedt the record from being created
+                // an internal error occurred that prevented the record from being created
                 throw Abort(new APIGatewayProxyResponse {
                     StatusCode = 500,
                     Body = "Unable to create post.",

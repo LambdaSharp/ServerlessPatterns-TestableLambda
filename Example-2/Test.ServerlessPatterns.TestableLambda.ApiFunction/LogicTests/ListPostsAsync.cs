@@ -4,6 +4,7 @@ using ServerlessPatterns.TestableLambda.ApiFunction;
 using Xunit;
 
 namespace Test.ServerlessPatterns.TestableLambda.ApiFunction.LogicTests {
+
     public class ListPostsAsync : _Init {
 
         //--- Methods ---

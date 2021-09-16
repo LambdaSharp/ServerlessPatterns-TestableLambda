@@ -16,7 +16,6 @@ namespace ServerlessPatterns.TestableLambda.ApiFunction {
 
         //--- Methods ---
         string CreatePostId();
-
         Task<bool> CreatePostRecordAsync(PostRecord record, CancellationToken cancellationToken = default);
         Task<PostRecord> GetPostRecordAsync(string postId, CancellationToken cancellationToken = default);
         Task<IEnumerable<PostRecord>> ListPostRecordsAsync(int limit, CancellationToken cancellationToken = default);
