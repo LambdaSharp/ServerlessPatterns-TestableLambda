@@ -9,7 +9,7 @@ using ServerlessPatterns.TestableLambda.ApiFunction.DataModel.Records;
 
 namespace ServerlessPatterns.TestableLambda.ApiFunction {
 
-    public interface IDependencyProvider : ILambdaSharpLogger {
+    public interface IDependencyProvider {
 
         //--- Properties ---
         DateTimeOffset UtcNow { get; }
@@ -20,6 +20,7 @@ namespace ServerlessPatterns.TestableLambda.ApiFunction {
         Task<bool> CreatePostRecordAsync(PostRecord record, CancellationToken cancellationToken = default);
         Task<PostRecord> GetPostRecordAsync(string postId, CancellationToken cancellationToken = default);
         Task<IEnumerable<PostRecord>> ListPostRecordsAsync(int limit, CancellationToken cancellationToken = default);
+        void Log(LambdaLogLevel level, Exception exception, string format, params object[] arguments);
     }
 
     public class Logic {
@@ -49,7 +50,7 @@ namespace ServerlessPatterns.TestableLambda.ApiFunction {
             try {
                 created = await Provider.CreatePostRecordAsync(postRecord, cancellationToken);
             } catch(Exception e) {
-                Provider.LogError(e, "failed to create post record");
+                Provider.Log(LambdaLogLevel.ERROR, e, "failed to create post record");
                 created = false;
             }
             return created

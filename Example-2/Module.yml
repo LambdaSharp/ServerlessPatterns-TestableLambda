@@ -15,7 +15,7 @@ Items:
       - Api: GET:/posts
         Invoke: ListPosts
 
-      - Api: GET:/view/{postId}
+      - Api: GET:/posts/{postId}/view
         Invoke: ViewPost
 
   - Resource: DataTable

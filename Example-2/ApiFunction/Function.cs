@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Amazon.Lambda.APIGatewayEvents;
 using LambdaSharp;
 using LambdaSharp.ApiGateway;
+using LambdaSharp.Logging;
 using ServerlessPatterns.TestableLambda.ApiFunction.DataAccess;
 using ServerlessPatterns.TestableLambda.ApiFunction.DataModel.Records;
 using ServerlessPatterns.TestableLambda.ApiFunction.Model;
@@ -101,5 +102,8 @@ namespace ServerlessPatterns.TestableLambda.ApiFunction {
 
         Task<IEnumerable<PostRecord>> IDependencyProvider.ListPostRecordsAsync(int limit, CancellationToken cancellationToken)
             => DataAccessClient.ListPostRecordsAsync(limit, cancellationToken);
+
+        void IDependencyProvider.Log(LambdaLogLevel level, Exception exception, string format, params object[] arguments)
+            => Logger.Log(level, exception, format, arguments);
     }
 }

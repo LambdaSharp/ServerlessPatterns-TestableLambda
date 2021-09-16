@@ -1,69 +1,25 @@
-using System;
+using System.Linq;
+using FluentAssertions;
+using ServerlessPatterns.TestableLambda.ApiFunction;
 using Xunit;
 
 namespace Test.ServerlessPatterns.TestableLambda.ApiFunction.LogicTests {
 
-    public class ConvertMarkdownToHtml {
+    public class ConvertMarkdownToHtml : _Init {
 
         //--- Methods ---
 
         [Fact]
-        public void Test1( ) {
+        public void Convert_valid_markdown() {
 
             // arrange
+            var logic = new Logic(Provider);
 
             // act
+            var html = logic.ConvertMarkdownToHtml("*Hello World*");
 
             // assert
-
-        }
-    }
-
-    public class CreatePostAsync {
-
-        //--- Methods ---
-
-        [Fact]
-        public void Test1( ) {
-
-            // arrange
-
-            // act
-
-            // assert
-
-        }
-    }
-
-    public class ViewPostAsync {
-
-        //--- Methods ---
-
-        [Fact]
-        public void Test1( ) {
-
-            // arrange
-
-            // act
-
-            // assert
-
-        }
-    }
-
-    public class ListPostsAsync {
-
-        //--- Methods ---
-
-        [Fact]
-        public void Test1( ) {
-
-            // arrange
-
-            // act
-
-            // assert
-
+            html.Should().Be("<p><em>Hello World</em></p>\n");
         }
     }
 }
