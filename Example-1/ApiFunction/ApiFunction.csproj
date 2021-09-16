@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Deterministic>true</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <RootNamespace>ServerlessPatterns.TestableLambda.ApiFunction</RootNamespace>
+    <NoWarn>CS1998</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.26.0"/>
+    <PackageReference Include="LambdaSharp.DynamoDB.Native" Version="0.8.3.*"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Condition="'$(LAMBDASHARP)'==''" Include="LambdaSharp.ApiGateway" Version="0.8.3.*"/>
+    <ProjectReference Condition="'$(LAMBDASHARP)'!=''" Include="$(LAMBDASHARP)\src\LambdaSharp.ApiGateway\LambdaSharp.ApiGateway.csproj"/>
+  </ItemGroup>
+</Project>
