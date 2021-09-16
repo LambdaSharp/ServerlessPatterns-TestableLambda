@@ -20,6 +20,7 @@ Items:
 
   - Resource: DataTable
     Scope: ApiFunction
+    Allow: ReadWrite
     Description: DynamoDB table
     Type: AWS::DynamoDB::Table
     Properties:
